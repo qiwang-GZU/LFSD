@@ -2,14 +2,12 @@
 
 ## Introduction
 
-This repo contains the official PyTorch implementation of our paper **LFSD: Self-Adaptive Prototype Decoupling for Few-Shot Object Detection**.
+This repo contains the official PyTorch implementation of our paper **Latent Feature Self-distillation with Task Dual Decoupling for Few-Shot Object Detection and Instance Segmentation**.
 
 LFSD introduces a novel approach to few-shot object detection by combining:
 - **SAIA (Self-Adaptive Instance Attention)**: A deformable transformer-based feature enhancement module
-- **Dual-Stream Decoupling**: Orthogonal feature learning with prototype memory
+- **Dual-Stream Decoupling**: Orthogonal feature learning with prototype memory bank
 - **Self-Distillation**: Knowledge transfer from base classes to novel classes
-
-<div align="center"><img src="assets/arch.png" width="800"></div>
 
 ## Quick Start
 
@@ -23,7 +21,7 @@ LFSD introduces a novel approach to few-shot object detection by combining:
 
 * Clone Code
   ```bash
-  git clone https://github.com/your-username/LFSD.git
+  git clone https://github.com/qiwang-GZU/LFSD.git
   cd LFSD
   ```
 
@@ -199,18 +197,6 @@ python tools/extract_results.py \
 
 This repo is developed based on [DeFRCN](https://github.com/er-muyue/DeFRCN), [TFA](https://github.com/ucbdrive/few-shot-object-detection), and [Detectron2](https://github.com/facebookresearch/detectron2). We thank the authors for their excellent work.
 
-## Citing
-
-If you use this work in your research, please cite:
-
-```bibtex
-@inproceedings{lfsd2024,
-  title={LFSD: Self-Adaptive Prototype Decoupling for Few-Shot Object Detection},
-  author={Your Name},
-  booktitle={Proceedings of Conference},
-  year={2024}
-}
-```
 
 ## License
 
