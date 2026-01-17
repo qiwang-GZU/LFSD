@@ -1,0 +1,88 @@
+from detectron2.config.defaults import _C
+from detectron2.config import CfgNode as CN
+
+_CC = _C
+
+# ----------- Backbone ----------- #
+_CC.MODEL.BACKBONE.FREEZE = False
+_CC.MODEL.BACKBONE.FREEZE_AT = 3
+_CC.MODEL.BACKBONE.WITHSAIA = False
+_CC.MODEL.BACKBONE.FREEZE_SAIA = False
+_CC.MODEL.BACKBONE.SAIA_ALPHA = 0.3  # Fusion weight for SAIA features
+
+# ------------- RPN -------------- #
+_CC.MODEL.RPN.FREEZE = False
+_CC.MODEL.RPN.ENABLE_DECOUPLE = False
+_CC.MODEL.RPN.BACKWARD_SCALE = 1.0
+
+# ------------- ROI -------------- #
+_CC.MODEL.ROI_HEADS.NAME = "Res5ROIHeads"
+_CC.MODEL.ROI_HEADS.FREEZE_FEAT = False
+_CC.MODEL.ROI_HEADS.FREEZE_FEAT_WITH_SAIA = True
+_CC.MODEL.ROI_HEADS.ENABLE_DECOUPLE = False
+_CC.MODEL.ROI_HEADS.BACKWARD_SCALE = 1.0
+_CC.MODEL.ROI_HEADS.OUTPUT_LAYER = "FastRCNNOutputLayers"
+_CC.MODEL.ROI_HEADS.CLS_DROPOUT = False
+_CC.MODEL.ROI_HEADS.DROPOUT_RATIO = 0.8
+_CC.MODEL.ROI_BOX_HEAD.POOLER_RESOLUTION = 7  # for faster
+_CC.MODEL.ROI_MASK_HEAD.FREEZE = False
+_CC.MODEL.ROI_MASK_HEAD.FREEZE_WITHOUT_PREDICTOR = False
+_CC.MODEL.ROI_BOX_HEAD.BBOX_CLS_LOSS_TYPE = 'CE'
+
+# ------------- TEST ------------- #
+_CC.TEST.PCB_ENABLE = False
+_CC.TEST.PCB_MODELTYPE = 'resnet'             # resnet | clip
+_CC.TEST.PCB_MODELPATH = ""
+_CC.TEST.PCB_ALPHA = 0.50
+_CC.TEST.PCB_UPPER = 1.0
+_CC.TEST.PCB_LOWER = 0.05
+_CC.TEST.PCB_NOVEL_ONLY = False
+_CC.TEST.PCB_TOPK = 0               # 0 = no filtering, >0 keeps top-K prototypes
+_CC.TEST.PCB_WEIGHTED = False
+
+# ----------- PCB-CLIP ------------- #
+_CC.TEST.CLIP_MODEL_NAME = "ViT-B-16"
+_CC.TEST.CLIP_PRETRAINED = "openai"
+_CC.TEST.CLIP_CHECKPOINT_PATH = ""
+_CC.TEST.PCB_USE_TEXT = False
+_CC.TEST.PCB_TEXT_TEMPLATES = [
+    "a photo of a {}",
+    "a clean photo of a {}",
+]
+_CC.TEST.PCB_CLIP_BATCH_SIZE = 64
+_CC.TEST.PCB_CROP_PAD = 0.0
+
+# ------------ Other ------------- #
+_CC.SOLVER.WEIGHT_DECAY = 5e-5
+_CC.SOLVER.WARMUP_SAIA_ITERS = 0
+_CC.MUTE_HEADER = True
+_CC.SEED = 0
+_CC.CUDNN_BENCHMARK = False
+_CC.SOLVER.AMP = CN()
+_CC.SOLVER.AMP.ENABLED = True
+
+# ------------ LFSD ------------- #
+_CC.DATASETS.TWO_STREAM = False
+_CC.MODEL.ROI_HEADS.MEMORY = False
+_CC.MODEL.ROI_HEADS.AUGMENTATION = False
+_CC.MODEL.ROI_HEADS.SEMANTIC = False
+_CC.MODEL.ROI_HEADS.WARMUP_DISTILL = 200
+_CC.MODEL.ROI_HEADS.QUEUE_LEN = 2048
+
+# ------------ CLIP Integration ------------- #
+_CC.MODEL.ROI_HEADS.USE_CLIP = False
+_CC.MODEL.CLIP = CN()
+_CC.MODEL.CLIP.MODEL_NAME = "ViT-B-16"
+_CC.MODEL.CLIP.PRETRAINED = "openai"
+_CC.MODEL.CLIP.CHECKPOINT_PATH = ""
+_CC.MODEL.CLIP.ADAPTER_HIDDEN_DIM = 1024
+_CC.MODEL.CLIP.ADAPTER_DROPOUT = 0.1
+_CC.MODEL.CLIP.TEXT_TEMPLATES = [
+    "a photo of a {}",
+    "a clean photo of a {}",
+    "a photo of the {}",
+]
+_CC.MODEL.CLIP.FUSION_WEIGHT_INIT = [1.0, 1.0, 0.5]
+_CC.MODEL.CLIP.SPSD_CLIP_WEIGHT = 0.3
+
+_CC.SOLVER.WARMUP_CLIP_ITERS = 200

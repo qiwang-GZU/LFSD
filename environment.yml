@@ -1,0 +1,92 @@
+# LFSD Conda Environment
+# Exported from mmdetectron environment
+# Usage: conda env create -f environment.yml
+#
+# Note: Some packages require special installation (see README.md):
+#   - detectron2: Install from official wheels matching your CUDA version
+#   - mmcv-full: Install from OpenMMLab wheels matching your CUDA/PyTorch version
+
+name: lfsd
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+
+dependencies:
+  # Python
+  - python=3.9
+
+  # Core CUDA (adjust version based on your GPU)
+  - cudatoolkit=12.1
+
+  # Basic dependencies from conda
+  - pip
+  - numpy>=1.26.0
+  - scipy>=1.13.0
+  - matplotlib>=3.9.0
+  - pillow>=11.0.0
+  - pyyaml>=6.0
+  - tqdm>=4.67.0
+  - six>=1.17.0
+  - packaging>=25.0
+
+  # Pip dependencies
+  - pip:
+    # PyTorch (CUDA 12.1)
+    - torch==2.2.2+cu121
+    - torchvision==0.17.2+cu121
+    - --extra-index-url https://download.pytorch.org/whl/cu121
+
+    # Detectron2 (install from source or wheels)
+    # - detectron2==0.3  # Install separately: see README.md
+
+    # MMDetection ecosystem
+    - mmcv-full==1.7.2
+    - mmdet==2.28.2
+
+    # CLIP for prototype calibration
+    - open-clip-torch==2.24.0
+    - ftfy>=6.3.0
+    - regex>=2025.9.0
+
+    # Detectron2 dependencies
+    - fvcore>=0.1.5
+    - iopath>=0.1.10
+    - cloudpickle>=3.1.0
+    - tabulate>=0.9.0
+    - termcolor>=3.1.0
+    - yacs>=0.1.8
+    - portalocker>=3.2.0
+    - pydot>=4.0.0
+
+    # Image processing
+    - opencv-python>=4.11.0
+    - scikit-image>=0.24.0
+    - imgaug>=0.4.0
+    - imageio>=2.37.0
+
+    # Evaluation
+    - pycocotools>=2.0.10
+
+    # Visualization & logging
+    - tensorboard>=2.20.0
+    - seaborn>=0.13.0
+
+    # ML utilities
+    - scikit-learn>=1.6.0
+    - pandas>=2.3.0
+    - timm>=1.0.22
+
+    # Other
+    - addict>=2.4.0
+    - yapf>=0.43.0
+    - future>=1.0.0
+    - shapely>=2.0.0
+
+# Post-installation notes:
+# 1. Install detectron2:
+#    python -m pip install detectron2 -f https://dl.fbaipublicfiles.com/detectron2/wheels/cu121/torch2.2/index.html
+#
+# 2. If mmcv-full installation fails, use:
+#    pip install mmcv-full -f https://download.openmmlab.com/mmcv/dist/cu121/torch2.2.0/index.html
