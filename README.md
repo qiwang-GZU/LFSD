@@ -1,5 +1,3 @@
-<div align="center"><img src="assets/header.png" width="840"></div>
-
 ## Introduction
 
 This repo contains the official PyTorch implementation of our paper **Latent Feature Self-distillation with Task Dual Decoupling for Few-Shot Object Detection and Instance Segmentation**.
