@@ -4,7 +4,7 @@ This repo contains the official PyTorch implementation of our paper **Latent Fea
 
 LFSD introduces a novel approach to few-shot object detection by combining:
 - **SAIA (Self-Adaptive Instance Attention)**: A deformable transformer-based feature enhancement module
-- **Dual-Stream Decoupling**: Orthogonal feature learning with prototype memory bank
+- **Dual-Decoupling**: Orthogonal feature learning with prototype memory bank
 - **Self-Distillation**: Knowledge transfer from base classes to novel classes
 
 ## Quick Start
